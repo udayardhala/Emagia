@@ -1,0 +1,156 @@
+We are using uptime robot for urls monitoring with free version.  
+With free version we could receive notification to two contacts earlier but now it allows only one group mail or indvidual emailid only. 
+But we want to add support@emagia.com also to sent uptime robot alerts, for this we need premium version.
+
+
+
+put jde in db connectivity
+put application names also at the urls
+put as api at the lock symbol
+
+
+During my call with Vinod, I have mentioned the applications as Emagia and GIA Docs along with the urls and also how they 
+interact with each other. Also please indicate how the database is accessed by the application and how it is secured. 
+
+
+Hi sunil
+
+As we discussed i have modifed the Architecture diagram. Using JWT Authentication GiaDocs and Emagia Erms interact with each other. ERMS application 
+is connected with database using JDBC drivers. Our entire production infra placed with in Private subnets.
+pfa
+
+
+As we discussed i have modifed the Architecture diagram.
+Using JWT Authentication GiaDocs will connect with an API running on Emagia Erms environment.
+ERMS application is connected with database using JDBC drivers. Our entire production infra placed with in Private subnets.
+  
+  
+  puttygen Emegia_Prod_PvtKey.ppk -O private-openssh -o Emegia_Prod_PvtKey.pem
+
+  puttygen Emegia_Prod_PvtKey.ppk -O private-openssh -o Emegia_Prod_PvtKey.pem
+  
+  
+Good Evening sir
+Today work update:
+ - implemented inspector report recomendations on Honest-sit app server
+ - worked on elida architecture diagram
+ - prepared the list of accounts which consists config, guardduty and security hub
+ - 
+ 
+ 
+winscp issue server password
+m3roRm$2xnza2QWJVQp%o9pNTh5kbnlP
+
+
+
+Hi sir
+we are storing the keypairs in google drive for now. could you please give approval to move these keys into the our internal s3 bucket
+
+
+
+HI  Team
+
+We are observing high CPU utilization on the Convatec Prod Toad server. We login to the server and observed that sql developer is taking 90 percent and other processes taking 9%.. we are facing connectivity issues to the server. Kindly please let us know the is it possible to reboot the server
+
+Please find below image for reference
+
+
+Hi Rahul
+
+Please create "api.emagia.com" domain and point to 3.142.33.183 
+
+
+7^PsIYs*V{}o562
+
+$Er$G,/Y6{o]URd
+
+
+ur{&kTIk,e;P*4a
+
+
+As mentioned in the previous mail, the issues were resolved for changing ppk and passphrase for the mentioned instances and we are looking for somemore alternatives.
+ we will update on this tomorrow 
+ 
+ 
+Instance IP - 3.142.33.183
+Username    - Emagia_Exchange
+Passphrase  - 7^PsIYs*V{}o562
+
+
+Instance IP - 18.221.14.94
+Username    - Emagia_Exchange
+Passphrase  - $Er$G,/Y6{o]URd
+
+
+Instance IP - 3.209.237.105
+Username    - ubuntu
+Passphrase  - ur{&kTIk,e;P*4a
+
+
+We have updated the keypairs and passphrase for the mentioned instances. I will share the keys and passwords internally. 
+Kindly check the connectivity and let us know if any issues while logging in.
+
+
+IMDSv2 and SSH2 both same?
+
+No, IMDSv2 (Instance Metadata Service Version 2) and SSH2 (Secure Shell version 2) are not the same. 
+They are two distinct technologies used for different purposes in the context of computer systems and cloud services.
+
+IMDSv2 (Instance Metadata Service Version 2):
+
+IMDSv2 is a service provided by cloud platforms like Amazon Web Services (AWS) for virtual instances, 
+such as Amazon EC2 instances. It allows these instances to retrieve metadata about themselves, such as instance identity, 
+network configuration, and other relevant information. 
+IMDSv2 is designed to enhance security by providing improved protection against attacks like SSRF (Server-Side Request Forgery)
+and unauthorized access to sensitive instance information.
+
+SSH2 (Secure Shell version 2):
+
+SSH2 is a cryptographic network protocol used for secure communication and remote access between two computers. It provides a secure channel over an unsecured network (such as the internet) for executing commands on a remote server, transferring files, and managing network devices. SSH2 offers strong encryption, authentication methods (including password and public key), and secure tunneling capabilities. It is widely used by system administrators, developers, and other users to access and manage remote systems securely.
+
+In summary, IMDSv2 is a service that allows virtual instances to retrieve metadata about themselves securely,
+while SSH2 is a protocol for secure remote access and communication between two computers. 
+They serve different purposes in the realm of cloud computing and network security.
+
+
+
+
+Hi RatnaPRasad
+
+Here i'm sharing the Staples-sit architecture 
+
+
+We have experinced the latency in cloudwatch putmetricdata from 5:18am to 7:58am due to the AWS side outage. The issue got resolved. Please ignore this alert.
+
+
+Hi sir
+i need to attend
+I hope this message finds you well. I am writing to request a leave of absence in order to 
+attend to an important personal matter – the registration of my vehicle. I understand the significance of maintaining a consistent presence at work, 
+and I assure you that I will make every effort to minimize any disruption to the team.
+
+i'm requesting you for one day leave on 17-08-2023 (Thursday) in order to attend to an important  personal matter - The registration of my vechicle. 
+I request you to please grant permission to work from home on wednesday (16-08-23) and Friday(18-08-23).
+
+
+
+
+R{bRia5}4,$0*j+vNj
+
+
+Hi Sriram
+
+Please install sql developer and oracle client in staple sit toad server. Please find below details
+
+
+af@?QjV6a[LU3eg+Mx%|
+
+
+
+f.(4.1P@Db#CgJbT)g=eySl! -- Administrator
+
+xgr$I}IF5@DYl$o0geqmQbat -- Sriram
+
+h_g5^x&ClCP8^5AtORv=GNC# -- Jagan
+
+gz2hbLnW!e%Oo_ogbXz!y4&8 -- GSS

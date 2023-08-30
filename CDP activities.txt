@@ -1,0 +1,14 @@
+https://unilever.cloud.com/Citrix/StoreWeb/#/home
+nagesh.adepu@unilever.com
+XNd2IhvQwERwug$4327$
+
+
+Putty
+naad1609
+Solix4701$$
+
+AWS_Prod/cdpdata/
+
+s3://aiedu-fs-solixpoc-n-bucket-03/AWS_Prod/cdpdata/
+
+aws s3 sync s3://aiedu-fs-solixpoc-n-bucket-03/AWS_Prod/cdpdata/

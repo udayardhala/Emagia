@@ -1,0 +1,76 @@
+################### Reserved instances pricing ###############
+https://aws.amazon.com/ebs/pricing/
+https://aws.amazon.com/ec2/pricing/reserved-instances/pricing/
+
+
+############## user passphrase update #############################
+- first go to puttygen
+- click on generate
+- give your new passphrase here
+- save publickey as a text file(.txt)
+- save the privatekey also
+- copy the public key to the user authorized keys
+- save and quit
+- try loggin in with old and new credentials
+
+
+
+
+####################Staples-Loadbalancer ##########################
+
+
+curl -vso /dev/null http://Staples-SIT-770400748.us-east-2.elb.amazonaws.com    
+*   Trying 3.136.202.2:80...
+* Connected to Staples-SIT-770400748.us-east-2.elb.amazonaws.com (3.136.202.2) port 80 (#0)
+> GET / HTTP/1.1
+> Host: Staples-SIT-770400748.us-east-2.elb.amazonaws.com
+> User-Agent: curl/8.1.2
+> Accept: */*
+> 
+< HTTP/1.1 404 Not Found
+< Date: Wed, 09 Aug 2023 10:34:30 GMT
+< Content-Type: text/html; charset=iso-8859-1
+< Content-Length: 208
+< Connection: keep-alive
+< Server: Apache/2.4.6 (CentOS)
+
+
+curl -vkso /dev/null http://localhost:80/cc/
+
+
+https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content
+
+How to fix a website with blocked mixed content - https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_co
+
+-------------------------------------------
+
+curl -vkso /dev/null http://localhost:8080/
+curl -vkso /dev/null http://localhost/
+cccurl -vkso /dev/null https://localhost/cc
+curl -v http://localhost/cc
+curl -v https://localhost/cc
+sudo netstat -tlpn
+nc -zv 127.0.0.1 80
+nc -zv 127.0.0.1 443
+https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html
+https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html#access-log-entry-syntax
+https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html#access-log-entry-syntax
+https://repost.aws/knowledge-center/cloudwatch-receive-sns-for-alarm-trigger
+requet
+target 
+responseelb 
+status 
+target 
+status code
+
+
+#################### user activity log ################
+user activity details -- cat /home/centos/.bash_history -- centos is the username
+                      -- cat /root/.bash_history
+					  --  https://www.redhat.com/sysadmin/configure-linux-auditing-auditd
+system level logs
+change hostname --  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-hostname.html#set-hostname-system
+inspector reports recomendations
+system hardening -- https://blog.devgenius.io/how-to-run-cis-benchmark-in-linux-d37737f80ada
+                  - https://aws.amazon.com/marketplace/seller-profile?id=dfa1e6a8-0b7b-4d35-a59c-ce272caee4fc
+

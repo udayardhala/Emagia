@@ -1,0 +1,69 @@
+++++++++++++++++ copy files and folders from local or linux server to s3 bucket ++++++++++++++++++++
+aws s3 sync s3://seko-ssl-2023/9090/ D:\Uday/9090/
+
+######################### CSR and KEy files for ssl certifcation ###############
+yum install openssl -y
+openssl req -new -newkey rsa:2048 -nodes -keyout chatbot_talhospitals_org.key -out chatbot_talhospitals_org.csr
+
+Country Name (2 letter code) [XX]:US
+State or Province Name (full name) []:California
+Locality Name (eg, city) [Default City]:Santa Clara
+Organization Name (eg, company) [Default Company Ltd]:Emagia Corporation
+Organizational Unit Name (eg, section) []:Cloud Solutions
+Common Name (eg, your name or your server's hostname) []:chatbot.talhospitals.org
+Email Address []:mis@solix.com
+skip
+skip
+
+
+############## user passphrase update #############################
+- first go to puttygen
+- click on generate
+- give your new passphrase here
+- save publickey as a text file(.txt)
+- save the privatekey also
+- copy the public key to the user authorized keys
+- save and quit
+- try loggin in with old and new credentials
+
+
+
+#################### SSM Agent installation ################
+Centos:
+sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+
+sudo systemctl status amazon-ssm-agent
+
+#################### AWS CLI installation ###############
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+vi .bashrc
+export PATH=/usr/local/bin:$PATH
+source ~/.bashrc
+aws --version
+
+
+
+##################### Create a new user in centos ###########################
+useradd username
+su username
+cd
+mkdir .ssh
+chmod 700 .ssh
+cd .ssh
+vi authorized_keys
+#copy the key from centos user authorized_keys
+chmod 600 authorized_keys
+
+
+############### command to install telnet in windows server ##################
+dism /online /Enable-Feature /FeatureName:TelnetClient
+
+
+
+################## audit logs #######################
+
+sudo ausearch -m SYSTEM_BOOT
+
+

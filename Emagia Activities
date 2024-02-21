@@ -1,16 +1,27 @@
 ++++++++++++++++ copy files and folders from local or linux server to s3 bucket ++++++++++++++++++++
 aws s3 sync s3://seko-ssl-2023/9090/ D:\Uday/9090/
 
+########################### move folders from local to s3 ########################
+aws s3 mv . s3://idc-ai-ui-logs/AI/logs/ --exclude "*" --include "2021-12*" --recursive
+
+du -ch 2023-06* | grep -E 'total$' ---> to find total size
+
+find /home/ubuntu/idcprod/AI/logs/2022-04-01 -maxdepth 1 -type f | wc -l -- to find the no of files in directory
+
+find /home/ubuntu/idcprod/AI/logs/2023-02-22 -name "filename" -- to search a particular file in a directory
+
 ######################### CSR and KEy files for ssl certifcation ###############
 yum install openssl -y
 openssl req -new -newkey rsa:2048 -nodes -keyout chatbot_talhospitals_org.key -out chatbot_talhospitals_org.csr
+
+openssl req -new -newkey rsa:2048 -nodes -keyout chatbot2_talhospitals_org.key -out chatbot2_talhospitals_org.csr
 
 Country Name (2 letter code) [XX]:US
 State or Province Name (full name) []:California
 Locality Name (eg, city) [Default City]:Santa Clara
 Organization Name (eg, company) [Default Company Ltd]:Emagia Corporation
 Organizational Unit Name (eg, section) []:Cloud Solutions
-Common Name (eg, your name or your server's hostname) []:chatbot.talhospitals.org
+Common Name (eg, your name or your server's hostname) []:chatbot2.talhospitals.org
 Email Address []:mis@solix.com
 skip
 skip
@@ -31,6 +42,11 @@ skip
 #################### SSM Agent installation ################
 Centos:
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+
+sudo systemctl status amazon-ssm-agent
+
+Redhat:
+sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 
 sudo systemctl status amazon-ssm-agent
 
@@ -56,6 +72,19 @@ vi authorized_keys
 #copy the key from centos user authorized_keys
 chmod 600 authorized_keys
 
+########################### whenever userlogin asks password ######################33
+passwd -d username
+#will delete the user password
+
+##################sudo permissions to user ####################
+visudo
+# add this line below root ALL...........
+username ALL=(ALL)NOPASSWD:ALL
+
+Staples_PDF_Prod  ALL=(ALL)NOPASSWD:ALL
+
+Staples_ERMS_Prod  ALL=(ALL)NOPASSWD:ALL
+
 
 ############### command to install telnet in windows server ##################
 dism /online /Enable-Feature /FeatureName:TelnetClient
@@ -66,4 +95,182 @@ dism /online /Enable-Feature /FeatureName:TelnetClient
 
 sudo ausearch -m SYSTEM_BOOT
 
+############# Modify volume size in redhat server ######################
 
+lsblk
+growpart /dev/xvda 4
+xfs_growfs /dev/svda4
+df -h 
+
+################### auditlogs configuration ###########################3
+
+journalctl -u auditd
+vi /etc/audit/auditd.conf
+ - space_left = 90
+ :wq!
+systemctl list-dependencies auditd
+systemctl restart system.slice
+journalctl -u auditd
+auditctl -l
+vi /etc/audit/audit.rules
+auditctl -R /etc/audit/audit.rules
+
+
+
+################## time sync issue ###########################
+Hi Team
+
+We logged in to the xylem child servers and observed that  time sync issue
+  in 10.5.4.222 and 10.5.3.138 servers. After observation, updated time as per the utc time zone.
+  Please check if any file processing is required
+
+################## Cloudwatch agent uninstall ###################33
+
+sudo yum -v remove amazon-cloudwatch-agent
+
+
+############################ Installing node js in centos ########################
+
+sudo yum install https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
+sudo yum install nodejs -y --setopt=nodesource-nodejs.module_hotfixes=1
+
+
+
+
+
+############## Reset windows password using ssm-run command ########
+https://repost.aws/knowledge-center/reset-admin-password
+
+
+
+####################### how to install python3.6 in centos7 ################
+sudo yum install centos-release-scl
+sudo yum install rh-python36 rh-python36-python-devel
+scl enable rh-python36 bash
+python --version
+
+vi ~/.bashrc
+alias python3="/usr/bin/python3.6"
+alias python="/usr/bin/python2.7"
+alias python3="/usr/bin/python3.6"
+
+source ~/.bashrc
+
+https://draculaservers.com/tutorials/install-python-3-centos-7/
+
+
+##################### change windows computer name ##################
+sysdm.cpl
+
+
+################## Cloudwatch agent installation through ssm ##################
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/download-CloudWatch-Agent-on-EC2-Instance-SSM-first.html
+
+Start the CloudWatch agent configuration wizard by entering the following:
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+
+To check the status:
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a status
+
+
+################# cloudwatch logs to s3 bucket using lambda ################
+add a policy of ec2-describe to the lambda role
+create environment variables in the lambda function
+timeout
+
+
+diff checker tool to compare the key files
+
+
+###################### Appache TLS1.3 upgrade in windows #######################
+edit the httpd-ssl.conf" file
+add the below line in SSL Protocol support:
+SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1 -TLSv1.2 +TLSv1.3
+
+################# ASG using Memory metrics###################
+https://aws.amazon.com/blogs/mt/create-amazon-ec2-auto-scaling-policy-memory-utilization-metric-linux/
+
+#!/bin/bash
+# Download CloudWatch Unified Agent for Amazon Linux 
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
+
+# Install The Unified agent
+rpm -U ./amazon-cloudwatch-agent.rpm
+
+## Configure the agent using the SSM Parameter
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c ssm:AmazonCloudWatch-Linuxconfig -s
+
+
+
+########################## Restoring/Backup policies ######################3
+We have 12hours backup for Application server and 5 min backup for Databases. If any disaster happen we will deploy the servers with latest backups.
+Application will be available with in 4 hours.
+
+################### java installation ############################
+https://www.javatpoint.com/javafx-how-to-install-java
+ - install in administrator user and then change environment variable in individual user
+
+#################runpod server setup for user creation ######################
+apt update
+apt install sudo
+apt install vim
+
+
+sudo useradd -m username
+sudo usermod -d /workspace/home/username -m username
+#change default bash path
+sudo usermod -s /bin/bash username
+
+sudo usermod -d /workspace/home/GiaGPT -s /bin/bash GiaGPT -m
+
+sudo usermod -d /workspace/home/Touch_A_Life -s /bin/bash Touch_A_Life -m
+
+#################### Install php 8.2 in centos 7 ##################
+
+sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+sudo yum-config-manager --enable remi-php82
+sudo yum -y install php
+php -v
+yum install php-cli php-zip wget unzip
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+HASH="$(wget -q -O - https://composer.github.io/installer.sig)"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+composer
+
+################ Install anti-virus in linux ####################
+ubuntu:
+sudo apt update
+sudo apt install clamav clamav-daemon
+clamscan --version
+systemctl status clamav-daemon
+systemctl start clamav-daemon
+clamscan
+
+######################### Athena Service ####################
+
+https://docs.aws.amazon.com/athena/latest/ug/application-load-balancer-logs.html
+
+https://repost.aws/knowledge-center/athena-analyze-access-logs
+
+############# querry to find no of requests ################3
+SELECT COUNT(*)
+FROM mybucket_logs
+WHERE day = '2024/02/16' 
+AND elb_status_code = 200;
+
+############### distinct client ips ############33
+SELECT client_ip, COUNT(*) AS count 
+FROM mybucket_logs 
+WHERE day = '2024/02/20' 
+GROUP BY client_ip 
+ORDER BY count(*) DESC;
+
+#########################request urls #################3
+SELECT request_url, user_agent, COUNT(*) AS count FROM mybucket_logs
+WHERE user_agent LIKE '%Firefox%'
+AND day = '2024/02/19'
+GROUP BY request_url, user_agent
+ORDER BY count(*) DESC
+LIMIT 10;
